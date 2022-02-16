@@ -19,7 +19,7 @@ public class RestProfessionController {
     private final ProfessionService service;
 
 
-    @RequestMapping("/all_professions")
+    @RequestMapping(value = "/all_professions", method = RequestMethod.GET)
     public List<Profession> allProfessions()
     {
         return service.getProfessions();
