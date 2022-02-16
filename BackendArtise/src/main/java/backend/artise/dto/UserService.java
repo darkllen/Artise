@@ -1,6 +1,5 @@
 package backend.artise.dto;
 
-
 import backend.artise.EntityIdResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,23 +11,37 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "user_category")
+@Table(name = "user_service")
 @ToString
-public class UserCategory {
+public class UserService {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 
-    @Column(name = "rating")
+
+    @Column(name = "time")
     @NotEmpty
-    private Float rating;
+    private Date time;
+
+    @Column(name = "is_cancelled")
+    @NotEmpty
+    private Boolean isCancelled;
+
+    @Column(name = "is_confirmed")
+    @NotEmpty
+    private Boolean isConfirmed;
+
+    @Column(name = "price")
+    @NotEmpty
+    private Float price;
 
 
     @JsonIdentityInfo(
@@ -44,19 +57,15 @@ public class UserCategory {
             generator = ObjectIdGenerators.PropertyGenerator.class,
             resolver = EntityIdResolver.class,
             property = "id",
-            scope= Category.class)
+            scope= Service.class)
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="category_id", nullable=false)
-    private Category category;
-
+    @JoinColumn(name="service_id", nullable=false)
+    private Service service;
 
         @JsonIgnore
-    @OneToMany(mappedBy="userCategory", fetch = FetchType.LAZY)
-    private List<Service> services;
-
-    @JsonIgnore
-    @OneToMany(mappedBy="userCategory", fetch = FetchType.LAZY)
-    private List<Review> reviews;
+    @OneToMany(mappedBy="userService", fetch = FetchType.EAGER)
+    private List<Notes> notes;
 
 }
+
 
