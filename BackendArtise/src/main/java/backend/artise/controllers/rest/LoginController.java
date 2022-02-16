@@ -1,6 +1,7 @@
 package backend.artise.controllers.rest;
 
 import backend.artise.dto.User;
+import backend.artise.dto.UserLogin;
 import backend.artise.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,4 +24,13 @@ public class LoginController {
         User createdUser = userService.addUser(user);
         return ResponseEntity.ok(createdUser);
     }
+
+    @ResponseBody
+    @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
+    public ResponseEntity login(@RequestBody @Valid UserLogin user){
+        User userRes = userService.getUserByLogin(user);
+        if (userRes == null) return ResponseEntity.badRequest().body("wrong password or nick");
+        return ResponseEntity.ok(userRes);
+    }
+
 }
