@@ -4,11 +4,11 @@ services:
   db:
     image: mysql
     ports:
-    - 5000:3306
+      - 5000:3306
     environment:
       MYSQL_ROOT_PASSWORD: pass
     volumes:
-    - C:\Programming\Artise\db:/var/lib/mysql
+      - C:\Programming\Artise\db:/var/lib/mysql
 
   adminer:
     image: phpmyadmin
