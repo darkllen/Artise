@@ -19,9 +19,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequiredArgsConstructor
 public class RestCategoryController {
     private final CategoryService service;
-    
 
-    @RequestMapping("/all_categories")
+
+    @RequestMapping(value = "/all_categories", method = RequestMethod.GET)
     public List<Category> categoriesByProfession(@RequestParam(name = "profession", required = false) Integer professionId)
     {
         if(professionId == null)
