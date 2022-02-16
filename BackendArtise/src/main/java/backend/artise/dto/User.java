@@ -33,11 +33,9 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    private String password;
-
-    @Column(name = "role")
     @NotEmpty
-    private Integer role;
+    @Length(min = 3, max = 30)
+    private String password;
 
     @Column(name = "name")
     @NotEmpty
