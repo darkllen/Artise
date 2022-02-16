@@ -10,6 +10,7 @@ public class ArtiseApplication {
 
         SpringApplication.run(ArtiseApplication.class, args);
         System.out.println("Running...");
+
     }
 
 }
