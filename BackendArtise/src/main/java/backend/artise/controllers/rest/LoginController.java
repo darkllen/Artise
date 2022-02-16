@@ -1,4 +1,4 @@
-package backend.artise.controllers;
+package backend.artise.controllers.rest;
 
 import backend.artise.dto.User;
 import backend.artise.services.UserService;
