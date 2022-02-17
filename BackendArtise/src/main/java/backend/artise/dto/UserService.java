@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -28,19 +29,19 @@ public class UserService {
 
 
     @Column(name = "time")
-    @NotEmpty
+    @NotNull
     private Date time;
 
     @Column(name = "is_cancelled")
-    @NotEmpty
+    @NotNull
     private Boolean isCancelled;
 
     @Column(name = "is_confirmed")
-    @NotEmpty
+    @NotNull
     private Boolean isConfirmed;
 
     @Column(name = "price")
-    @NotEmpty
+    @NotNull
     private Float price;
 
 

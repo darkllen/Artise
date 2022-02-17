@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -36,11 +37,11 @@ public class Service {
     private String description;
 
     @Column(name = "price")
-    @NotEmpty
+    @NotNull
     private Float price;
 
     @Column(name = "duration_minutes")
-    @NotEmpty
+    @NotNull
     private Integer duration_minutes;
 
     @JsonIdentityInfo(

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -23,6 +24,17 @@ public class RestProfessionController {
     public List<Profession> allProfessions()
     {
         return service.getProfessions();
+    }
+
+    @RequestMapping("/profession/{id}")
+    public ResponseEntity getProfession(@PathVariable(value="id") Integer id) {
+        Optional<Profession> professionOptional = service.getById(id);
+        if (professionOptional.isPresent()){
+            return ResponseEntity.ok(professionOptional.get());
+        }
+        else{
+            return ResponseEntity.badRequest().body("wrong profession id");
+        }
     }
 
 }

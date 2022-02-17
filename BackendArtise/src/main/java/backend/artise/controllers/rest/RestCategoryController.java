@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -28,6 +29,17 @@ public class RestCategoryController {
             return service.getCategories();
         else
             return service.getCategoriesByProfessionId(professionId);
+    }
+
+    @RequestMapping("/category/{id}")
+    public ResponseEntity getCategory(@PathVariable(value="id") Integer id) {
+        Optional<Category> categoryOptional = service.getById(id);
+        if (categoryOptional.isPresent()){
+            return ResponseEntity.ok(categoryOptional.get());
+        }
+        else{
+            return ResponseEntity.badRequest().body("wrong category id");
+        }
     }
 
 }

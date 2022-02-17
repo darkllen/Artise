@@ -1,5 +1,6 @@
 package backend.artise.services;
 
+import backend.artise.dto.Category;
 import backend.artise.dto.User;
 import backend.artise.dto.UserLogin;
 import backend.artise.repos.UserRepo;
@@ -28,4 +29,14 @@ public class UserService {
         if (user.get().getPassword().equals(userLogin.getPassword())) return user.get();
         return null;
     }
+
+    public User editUser(User user) {
+        userRepo.saveAndFlush(user);
+        return user;
+    }
+
+    public Optional<User> getById(int id){
+        return userRepo.findById(id);
+    }
+
 }

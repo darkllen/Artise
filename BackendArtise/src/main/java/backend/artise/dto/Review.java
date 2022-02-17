@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -29,7 +30,7 @@ public class Review {
     private String text;
 
     @Column(name = "rating")
-    @NotEmpty
+    @NotNull
     private Integer rating;
 
     @JsonIdentityInfo(
