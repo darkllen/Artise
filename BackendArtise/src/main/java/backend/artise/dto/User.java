@@ -35,7 +35,8 @@ public class User {
 
     @Column(name = "password")
     @NotEmpty
-    @Length(min = 3, max = 30)
+    @JsonIgnore
+    @Length(min = 3, max = 255)
     private String password;
 
     @Column(name = "name")

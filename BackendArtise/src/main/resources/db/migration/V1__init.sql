@@ -2,7 +2,7 @@ CREATE TABLE `artise`.`profession` ( `id` INT NOT NULL AUTO_INCREMENT , `name` V
 CREATE TABLE `artise`.`category` ( `id` INT NOT NULL AUTO_INCREMENT , `profession_id` INT NOT NULL , `name` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`));
 ALTER TABLE `category` ADD FOREIGN KEY (`profession_id`) REFERENCES `profession`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-CREATE TABLE `artise`.`user` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `surname` VARCHAR(50) NOT NULL , `nickname` VARCHAR(50) NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(50) NOT NULL , `phone` VARCHAR(50) NULL , `role` INT NOT NULL DEFAULT '0' , `info` VARCHAR(255) NULL , PRIMARY KEY (`id`), UNIQUE (`nickname`));
+CREATE TABLE `artise`.`user` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `surname` VARCHAR(50) NOT NULL , `nickname` VARCHAR(50) NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(255) NOT NULL , `phone` VARCHAR(50) NULL , `info` VARCHAR(255) NULL , PRIMARY KEY (`id`), UNIQUE (`nickname`));
 
 CREATE TABLE `artise`.`user_category` ( `id` INT NOT NULL AUTO_INCREMENT , `user_id` INT NOT NULL , `category_id` INT NOT NULL , `rating` FLOAT NULL , PRIMARY KEY (`id`));
 
