@@ -47,6 +47,7 @@ public class UserCategory {
             property = "id",
             scope= Category.class)
     @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
     @JoinColumn(name="category_id", nullable=false)
     private Category category;
 

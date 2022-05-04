@@ -5,9 +5,11 @@ import backend.artise.dto.User;
 import backend.artise.dto.UserLogin;
 import backend.artise.repos.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,7 +23,7 @@ public class UserService {
     }
 
     public User addUser(User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.saveAndFlush(user);
         return user;
     }
@@ -42,4 +44,10 @@ public class UserService {
         return userRepo.findById(id);
     }
 
+    public List<User> getUsersListWithoutCurrent(User userInit, String sort_by, Integer order) {
+        if (sort_by.equals("")){sort_by="id";}
+        Sort.Direction direction = Sort.Direction.ASC;
+        if (order==1){direction = Sort.Direction.DESC;}
+        return userRepo.getUsersListWithoutCurrent(userInit, Sort.by(direction, sort_by));
+    }
 }

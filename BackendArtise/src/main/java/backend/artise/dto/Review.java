@@ -48,7 +48,7 @@ public class Review {
             property = "id",
             scope= UserCategory.class)
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_category", nullable=false)
+    @JoinColumn(name="user_category_id", nullable=false)
     private UserCategory userCategory;
 
 }

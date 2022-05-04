@@ -37,6 +37,7 @@ public class Category {
             property = "id",
             scope= Profession.class)
     @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
     @JoinColumn(name="profession_id", nullable=false)
     private Profession profession;
 

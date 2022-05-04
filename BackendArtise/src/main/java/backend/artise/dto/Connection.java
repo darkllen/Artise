@@ -32,8 +32,8 @@ public class Connection {
             generator = ObjectIdGenerators.PropertyGenerator.class,
             resolver = EntityIdResolver.class,
             property = "id",
-            scope= UserService.class)
-    @ManyToOne(fetch = FetchType.LAZY)
+            scope= User.class)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_init_id", nullable=false)
     private User user_init;
 
@@ -41,8 +41,8 @@ public class Connection {
             generator = ObjectIdGenerators.PropertyGenerator.class,
             resolver = EntityIdResolver.class,
             property = "id",
-            scope= UserService.class)
-    @ManyToOne(fetch = FetchType.LAZY)
+            scope= User.class)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_to_connect_id", nullable=false)
     private User user_to_connect;
 }

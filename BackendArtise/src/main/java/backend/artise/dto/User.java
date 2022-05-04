@@ -2,6 +2,7 @@ package backend.artise.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -35,7 +36,7 @@ public class User {
 
     @Column(name = "password")
     @NotEmpty
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Length(min = 3, max = 255)
     private String password;
 
@@ -58,10 +59,12 @@ public class User {
     private String info;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Review> reviews;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<UserCategory> userCategories;
 
