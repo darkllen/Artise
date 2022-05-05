@@ -2,6 +2,7 @@ package backend.artise.controllers.rest;
 
 import backend.artise.dto.Category;
 import backend.artise.dto.Profession;
+import backend.artise.dto.UserCategory;
 import backend.artise.services.CategoryService;
 import backend.artise.services.ProfessionService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class RestCategoryController {
     private final CategoryService service;
 
+
+    @ResponseBody
+    @RequestMapping(value = {"/add_category"}, method = RequestMethod.POST)
+    public ResponseEntity addCategory(@RequestBody @Valid Category category){
+        //todo user authorization
+        Category createdCategory = service.addCategory(category);
+        return ResponseEntity.ok(createdCategory);
+    }
 
     @RequestMapping(value = "/all_categories", method = RequestMethod.GET)
     public List<Category> categoriesByProfession(@RequestParam(name = "profession", required = false) Integer professionId)

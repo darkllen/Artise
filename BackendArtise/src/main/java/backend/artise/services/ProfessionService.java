@@ -1,6 +1,7 @@
 package backend.artise.services;
 
 
+import backend.artise.dto.Category;
 import backend.artise.dto.Profession;
 import backend.artise.repos.ProfessionRepo;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,10 @@ public class ProfessionService {
 
     public void removeProfessionById(Integer id) {
         repo.deleteById(id);
+    }
+
+    public Profession addProfession(Profession profession) {
+        repo.saveAndFlush(profession);
+        return profession;
     }
 }

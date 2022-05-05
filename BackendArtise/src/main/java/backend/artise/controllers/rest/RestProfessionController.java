@@ -1,5 +1,6 @@
 package backend.artise.controllers.rest;
 
+import backend.artise.dto.Category;
 import backend.artise.dto.Profession;
 import backend.artise.services.ProfessionService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class RestProfessionController {
     private final ProfessionService service;
 
+    @ResponseBody
+    @RequestMapping(value = {"/add_profession"}, method = RequestMethod.POST)
+    public ResponseEntity addProfession(@RequestBody @Valid Profession profession){
+        //todo user authorization
+        Profession createdProfession = service.addProfession(profession);
+        return ResponseEntity.ok(createdProfession);
+    }
 
     @RequestMapping(value = "/all_professions", method = RequestMethod.GET)
     public List<Profession> allProfessions()

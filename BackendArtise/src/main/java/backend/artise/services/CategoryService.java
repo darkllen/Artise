@@ -2,6 +2,7 @@ package backend.artise.services;
 
 
 import backend.artise.dto.Category;
+import backend.artise.dto.UserCategory;
 import backend.artise.repos.CategoryRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,10 @@ public class CategoryService {
 
     public void removeCategoryById(Integer id) {
         repo.deleteById(id);
+    }
+
+    public Category addCategory(Category category) {
+        repo.saveAndFlush(category);
+        return category;
     }
 }
