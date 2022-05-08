@@ -1,9 +1,6 @@
 package backend.artise.controllers.rest;
 
-import backend.artise.dto.Connection;
-import backend.artise.dto.User;
-import backend.artise.dto.UserCategory;
-import backend.artise.dto.UserLogin;
+import backend.artise.dto.*;
 import backend.artise.services.ConnectionService;
 import backend.artise.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +38,17 @@ public class RestUserController {
     }
 
 
+
+    @RequestMapping("/user/{id}")
+    public ResponseEntity getCategory(@PathVariable(value="id") Integer id) {
+        Optional<User> userOptional = service.getById(id);
+        if (userOptional.isPresent()){
+            return ResponseEntity.ok(userOptional.get());
+        }
+        else{
+            return ResponseEntity.badRequest().body("wrong user id");
+        }
+    }
 
 
 }
