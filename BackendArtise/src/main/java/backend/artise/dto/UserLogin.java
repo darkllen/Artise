@@ -22,10 +22,10 @@ public class UserLogin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nickname", unique = true)
+    @Column(name = "email", unique = true)
     @NotEmpty
     @Length(min = 3, max = 30)
-    private String nickname;
+    private String email;
 
     @Column(name = "password")
     private String password;

@@ -40,4 +40,8 @@ public class ReviewService {
         if (order==1){direction = Sort.Direction.DESC;}
         return repo.findAllByUser(user, Sort.by(direction, sort_by));
     }
+
+    public double getAvRating(User user){
+        return repo.getAvgRatingUser(user);
+    }
 }

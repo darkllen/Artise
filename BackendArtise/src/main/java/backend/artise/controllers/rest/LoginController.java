@@ -36,7 +36,7 @@ public class LoginController {
     @ResponseBody
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
     public ResponseEntity register(@RequestBody @Valid User user){
-        if (userService.getByNickname(user.getNickname()).isPresent()){
+        if (userService.getByEmail(user.getEmail()).isPresent()){
             return ResponseEntity.badRequest().body("nick is already exists");
         }
         User createdUser = userService.addUser(user);
@@ -47,23 +47,22 @@ public class LoginController {
     public ResponseEntity<User> login(@RequestBody @Valid UserLogin request) {
         try {
             System.out.println(request);
-//            request.setPassword(passwordEncoder.encode(request.getPassword()));
             Authentication authenticate = authenticationManager
                     .authenticate(
                             new UsernamePasswordAuthenticationToken(
-                                    request.getNickname(), request.getPassword()
+                                    request.getEmail(), request.getPassword()
                             )
                     );
 
             System.out.println("asa");
             org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) authenticate.getPrincipal();
-            System.out.println(user.getUsername());
+            User user1 = userService.getByEmail(request.getEmail()).get();
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
-                            jwtTokenUtil.generateToken(user.getUsername())
+                            jwtTokenUtil.generateToken(user.getUsername(), String.valueOf(user1.getId()))
                     )
-                    .body(userService.getByNickname(user.getUsername()).get());
+                    .body(user1);
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

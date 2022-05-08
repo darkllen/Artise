@@ -15,10 +15,11 @@ public class JwtProvider {
 
     private String jwtSecret = "secret";
 
-    public String generateToken(String login) {
+    public String generateToken(String login, String id) {
         Date date = Date.from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .setSubject(login)
+                .setId(id)
                 .setExpiration(date)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();

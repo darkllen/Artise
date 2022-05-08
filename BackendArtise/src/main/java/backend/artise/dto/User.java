@@ -23,10 +23,11 @@ public class User {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "nickname", unique = true)
-    @NotEmpty
-    @Length(min = 3, max = 30)
+//
+//    @Column(name = "nickname", unique = true)
+//    @NotEmpty
+//    @Length(min = 3, max = 30)
+    @Column(name = "nickname")
     private String nickname;
 
     @Column(name = "email", unique = true)
@@ -57,6 +58,9 @@ public class User {
     @Column(name = "info")
     @Length(max = 255)
     private String info;
+
+    @Column
+    private String profile_image;
 
     @JsonIgnore
     @ToString.Exclude

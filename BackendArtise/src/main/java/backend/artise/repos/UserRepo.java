@@ -11,6 +11,9 @@ import java.util.Optional;
 public interface UserRepo extends JpaRepository<User, Integer> {
     Optional<User> getByNickname(String nick);
 
+    Optional<User> getByEmail(String email);
+
     @Query("SELECT u from User u where u <> ?1")
     List<User> getUsersListWithoutCurrent(User userInit, Sort by);
+
 }

@@ -40,4 +40,7 @@ public class RestUserController {
         return ResponseEntity.ok().body(service.getUsersListWithoutCurrent(userInit.get(), sort_by, order));
     }
 
+
+
+
 }

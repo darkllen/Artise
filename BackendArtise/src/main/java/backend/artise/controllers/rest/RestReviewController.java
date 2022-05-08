@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -74,4 +75,15 @@ public class RestReviewController {
 
     }
 
+    @RequestMapping(value = "/get_avg_rating", method = RequestMethod.GET)
+    public ResponseEntity getAvgRating(@RequestBody Map<String, Object> map) {
+        Optional<User> userInit = userService.getById((Integer) map.getOrDefault("user_id", 0));
+
+        try{
+            return ResponseEntity.ok().body(reviewService.getAvRating(userInit.get()));
+        } catch (NullPointerException n){
+            return ResponseEntity.ok().body(null);
+        }
+
+    }
 }

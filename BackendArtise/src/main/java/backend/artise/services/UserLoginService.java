@@ -17,7 +17,7 @@ public class UserLoginService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final UserLogin user = repo.findUserByNickname(username)
+        final UserLogin user = repo.findUserByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("No user with login: " + username));
 
         return User.builder()

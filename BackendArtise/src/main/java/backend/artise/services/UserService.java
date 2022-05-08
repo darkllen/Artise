@@ -19,7 +19,11 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public Optional<User> getByNickname(String nick){
-        return userRepo.getByNickname(nick);
+        return userRepo.getByEmail(nick);
+    }
+
+    public Optional<User> getByEmail(String nick){
+        return userRepo.getByEmail(nick);
     }
 
     public User addUser(User user) {
@@ -29,13 +33,14 @@ public class UserService {
     }
 
     public User getUserByLogin(UserLogin userLogin){
-        Optional<User> user = userRepo.getByNickname(userLogin.getNickname());
+        Optional<User> user = userRepo.getByNickname(userLogin.getEmail());
         if (user.isEmpty()) return null;
         if (user.get().getPassword().equals(userLogin.getPassword())) return user.get();
         return null;
     }
 
     public User editUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.saveAndFlush(user);
         return user;
     }
@@ -50,4 +55,6 @@ public class UserService {
         if (order==1){direction = Sort.Direction.DESC;}
         return userRepo.getUsersListWithoutCurrent(userInit, Sort.by(direction, sort_by));
     }
+
+
 }

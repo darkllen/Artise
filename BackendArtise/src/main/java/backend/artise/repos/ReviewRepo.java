@@ -17,4 +17,8 @@ public interface ReviewRepo extends JpaRepository<Review, Integer> {
 
     @Query("SELECT AVG(r.rating) FROM Review r WHERE r.userCategory = ?1")
     Float getAverageRating(UserCategory category);
+
+
+    @Query("SELECT AVG(r.rating) FROM Review r WHERE r.user = ?1")
+    Float getAvgRatingUser(User user);
 }
