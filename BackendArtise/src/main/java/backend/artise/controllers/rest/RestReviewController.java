@@ -75,7 +75,7 @@ public class RestReviewController {
 
     }
 
-    @RequestMapping(value = "/get_avg_rating", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_avg_rating", method = RequestMethod.POST)
     public ResponseEntity getAvgRating(@RequestBody Map<String, Object> map) {
         Optional<User> userInit = userService.getById((Integer) map.getOrDefault("user_id", 0));
 
