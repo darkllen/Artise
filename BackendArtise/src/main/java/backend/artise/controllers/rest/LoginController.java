@@ -40,7 +40,10 @@ public class LoginController {
             return ResponseEntity.badRequest().body("nick is already exists");
         }
         User createdUser = userService.addUser(user);
-        return ResponseEntity.ok(createdUser);
+        return ResponseEntity.ok().header(
+                HttpHeaders.AUTHORIZATION,
+                jwtTokenUtil.generateToken(createdUser.getEmail(), String.valueOf(createdUser.getId()))
+        ).body(createdUser);
     }
 
     @PostMapping("login")
