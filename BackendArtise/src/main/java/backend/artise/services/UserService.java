@@ -40,7 +40,13 @@ public class UserService {
     }
 
     public User editUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User user_prev = userRepo.getByEmail(user.getEmail()).get();
+        user.setId(user_prev.getId());
+        if (user.getPassword() == null){
+            user.setPassword(user_prev.getPassword());
+        } else{
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userRepo.saveAndFlush(user);
         return user;
     }
