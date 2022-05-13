@@ -36,7 +36,6 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    @NotEmpty
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Length(min = 3, max = 255)
     private String password;
